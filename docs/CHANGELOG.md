@@ -45,3 +45,36 @@
 - `content/i18n.json` — строки chrome (`nav.back`, `nav.home`, `nav.map`, `lang.*`, `attract.hint`) на `uz` (латиница, D2 TBD), `ru`, `en`.
 - Smoke-тест `packages/content/src/__tests__/load.test.ts` (vitest): 8 кейсов — валидный контент, ветка/лист, зона-тур, невалидный kind, пропущенные поля. Все зелёные.
 - `typecheck` зелёный по всем четырём пакетам.
+
+### Added (2026-06-17) — Фаза 1: shell + attract
+
+**contract:**
+- `KioskConfig.attractVideoSrc` — путь к видео attract-loop (codec TBD, зависит от D1).
+- `content/src/index.ts` разделён: browser-safe экспорты (типы, assertNever, схемы) вынесены в `index.ts`;
+  `loadContent` остаётся в `load.ts` (Node.js only, импортируется напрямую в main-процессе).
+
+**main (Electron, CJS):**
+- `packages/main/src/window.ts` — `createWindow()`: `BrowserWindow` kiosk/fullscreen в prod,
+  windowed+DevTools в dev; preload, `contextIsolation: true`, блок `context-menu`.
+- `packages/main/src/preload.ts` — `contextBridge.exposeInMainWorld('kiosk', api)`;
+  имплементирует `KioskApi` поверх `ipcRenderer` (send/on/invoke).
+- `packages/main/src/ipc-main.ts` — `setupIpc()`: `ipcMain.handle('kiosk:getConfig')`;
+  дефолтный `KioskConfig` (idleTimeout 60s, lang 'ru', видео-путь — заглушка до D1).
+- `packages/main/src/lifecycle.ts` — `startLifecycle()`: idle-таймер с автосбросом по
+  `reportActivity`, `kiosk:idleReset` → renderer, `powerSaveBlocker`, очистка на `closed`.
+- `packages/main/src/index.ts` — entry: single-instance lock, `setupIpc`, `createWindow`,
+  `startLifecycle`; авто-рестарт через `app.relaunch()` при падении renderer.
+- Корневые скрипты: `build:main`, `build:renderer`, `dev:renderer`, `dev:main` (cross-env).
+
+**renderer (Vite + React + TypeScript strict):**
+- `packages/renderer/vite.config.ts` — Vite 5 + `@vitejs/plugin-react`, port 5173.
+- `packages/renderer/index.html` — CSP, `cursor: none`, `user-select: none`, `overflow: hidden`.
+- `packages/renderer/src/global.d.ts` — `declare global { interface Window { kiosk: KioskApi } }`.
+- `packages/renderer/src/state/screen.ts` — `KioskScreen` (attract/menu/map/tour),
+  `Action` (WAKE/DRILL/BACK/HOME/OPEN_TARGET/IDLE_RESET/SET_LANG), `AppState`, reducer (exhaustive).
+- `packages/renderer/src/App.tsx` — `useReducer`, `getConfig` при старте, `onIdleReset` hook,
+  `reportActivity` на `pointerdown`; switch по `screen.kind` с `assertNever` в default.
+- `packages/renderer/src/screens/AttractScreen.tsx` — `<video loop muted playsInline>`,
+  hint-текст (uz/ru/en), `onPointerDown` → WAKE.
+- `packages/renderer/src/main.tsx` — `createRoot` + `<App />`.
+- `typecheck` зелёный по всем четырём пакетам; content smoke-тесты 8/8 зелёных.
