@@ -5,6 +5,7 @@ import type { KioskConfig } from '@navaport/contract';
 import { reducer, initialState } from './state/screen';
 import { AttractScreen } from './screens/AttractScreen';
 import { MenuScreen } from './screens/MenuScreen';
+import { MapScreen } from './screens/MapScreen';
 
 // --- video overlay opacity per screen state ---
 function overlayOpacity(screen: ReturnType<typeof reducer>['screen']): number {
@@ -130,11 +131,19 @@ export function App(): React.ReactElement {
         />
       )}
 
-      {screen.kind === 'map' && (
-        <div style={styles.placeholder} onPointerDown={() => dispatch({ type: 'HOME' })}>
-          Map {screen.floorId} — Phase 3
-        </div>
-      )}
+      {(() => {
+        if (screen.kind !== 'map' || content === null) return null;
+        const map = content.maps.find((m) => m.id === screen.floorId);
+        if (map === undefined) return null;
+        return (
+          <MapScreen
+            map={map}
+            lang={lang}
+            i18n={content.i18n}
+            dispatch={dispatch}
+          />
+        );
+      })()}
 
       {screen.kind === 'tour' && (
         <div style={styles.placeholder} onPointerDown={() => dispatch({ type: 'HOME' })}>

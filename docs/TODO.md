@@ -12,20 +12,22 @@
 
 Цель фазы: рендер SVG-плана этажа, кликабельные зоны, тап → `OPEN_TARGET`.
 
-- [ ] `MapScreen.tsx` — компонент экрана карты
-- [ ] Рендеринг SVG через `<img>` или инлайн-SVG с наложенными зонами
-- [ ] Поддержка `ZoneShape`: `rect` и `polygon`
-- [ ] Тап по зоне → `dispatch({ type: 'OPEN_TARGET', target: zone.target })`
-- [ ] Кнопка «Домой» (NavBar переиспользуется или минимальная шапка)
-- [ ] Заглушка `content/maps.json` с реальными координатами (зависит от D4)
+- [x] `MapScreen.tsx` — компонент экрана карты
+- [x] `FloorMap.viewBox` добавлен в тип и Zod-схему; зоны рендерятся в одном SVG-пространстве
+- [x] SVG `<image>` + SVG `<rect>`/`<polygon>` оверлеи, все в одном `<svg viewBox>`
+- [x] Поддержка `ZoneShape`: `rect` и `polygon`; exhaustive через `assertNever`
+- [x] Тап по зоне → `dispatch({ type: 'OPEN_TARGET', target: zone.target })`
+- [x] NavBar переиспользован (breadcrumb = название этажа, BACK/HOME → menu root)
+- [x] Fixture `content/maps.json`: 3 зоны — rect, polygon, rect (3 разных `target`)
+- [x] Заглушка `renderer/public/assets/maps/floor-1.svg` — схематичный план терминала
 
 ### Тестовый актив
 - [ ] `public/video/attract.mp4` — положить заглушку или реальный ролик после D1
-- [ ] SVG-план этажа — после решения D4
+- [ ] Заменить placeholder SVG реальным планом после решения D4
 
 ### Проверка фазы
-- [ ] Клик по зоне `rect` → правильный `target` через `assertNever`-покрытый reducer
-- [ ] `typecheck` зелёный
+- [x] Клик по зоне `rect`/`polygon` → правильный `target` через reducer (assertNever-покрытый)
+- [x] `typecheck` зелёный по всем пакетам; content smoke-тесты 8/8 зелёных
 
 ---
 

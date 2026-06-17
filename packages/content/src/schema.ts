@@ -63,6 +63,7 @@ const floorMap: z.ZodType<FloorMap, z.ZodTypeDef, unknown> = z.object({
   id: z.string(),
   title: localized,
   svgAsset: z.string(),
+  viewBox: z.string(),
   zones: z.array(mapZone),
 }) as z.ZodType<FloorMap, z.ZodTypeDef, unknown>;
 

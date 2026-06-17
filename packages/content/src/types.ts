@@ -42,6 +42,7 @@ export interface FloorMap {
   readonly id: string;
   readonly title: Localized;
   readonly svgAsset: string;
+  readonly viewBox: string;
   readonly zones: readonly MapZone[];
 }
 
