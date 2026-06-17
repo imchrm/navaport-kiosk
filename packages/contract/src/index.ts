@@ -1,1 +1,1 @@
-export type {} from './ipc.js';
+export type { KioskConfig, KioskApi } from './ipc.js';

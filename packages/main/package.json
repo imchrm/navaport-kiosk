@@ -2,11 +2,17 @@
   "name": "@navaport/main",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  "main": "dist/index.js",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
   },
   "dependencies": {
-    "@navaport/contract": "*"
+    "@navaport/contract": "*",
+    "@navaport/content": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "electron": "^31.0.0"
   }
 }

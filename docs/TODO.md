@@ -8,53 +8,54 @@
 
 ---
 
-## Сейчас — Фаза 0: каркас
+## Сейчас — Фаза 1: shell + attract
 
-Цель фазы: пустой, но строго типизированный монорепо, который грузит и валидирует
-тестовый контент. Кода UI/Electron ещё нет.
+Цель фазы: Electron-оболочка с kiosk-окном, attract-loop видео, idle-сброс, типизированный IPC, watchdog.
 
-### Репозиторий и тулчейн
-- [x] `package.json` с `workspaces` (`packages/*`)
-- [x] `tsconfig.base.json` — `strict: true`, плюс `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`
-- [x] ESLint + Prettier, `.editorconfig` (UTF-8, LF)
-- [x] Скелеты пакетов: `contract`, `content`, `main`, `renderer` (только `package.json` + `tsconfig` + пустой `src/index.ts`)
-- [x] `npm run typecheck` как агрегирующий скрипт по всем пакетам
+### Electron main process
+- [x] Kiosk-окно (`BrowserWindow` fullscreen/kiosk в prod, windowed в dev)
+- [x] Preload bridge (`contextBridge` + `KioskApi` facade)
+- [x] Типизированный IPC: `kiosk:reportActivity`, `kiosk:idleReset`, `kiosk:getConfig`
+- [x] `KioskConfig` с `idleTimeoutMs`, `defaultLang`, `attractVideoSrc`
+- [x] Idle-таймер в main: сброс по `reportActivity`, отправляет `kiosk:idleReset` в renderer
+- [x] `powerSaveBlocker.start('prevent-display-sleep')`
+- [x] Single-instance lock (`app.requestSingleInstanceLock`)
+- [x] Авто-рестарт renderer при падении (`webContents.on('destroyed')`)
+- [ ] Блокировки жестов (pinch-zoom, drag, F-keys) — перенести в Фазу 5
+- [ ] Авто-старт при загрузке ОС — перенести в Фазу 5 (зависит от D1)
 
-### Пакет `content`
-- [x] `types.ts` — перенести типы из `ARCHITECTURE.md` §6 (`Localized`, `NavTarget`, `MenuNode`, `FloorMap`, `MapZone`, `ZoneShape`)
-- [x] `assertNever` helper
-- [x] `schema.ts` — Zod-схемы: `navTarget` (discriminatedUnion), `floorMap`, `navSchema`
-- [x] Аккуратно типизировать рекурсивную схему меню (`z.lazy`) — без `ZodType<unknown>`, с явным `ZodType<MenuNode, ZodTypeDef, unknown>` и комментарием про Zod v3
-- [x] `load.ts` — чтение JSON + валидация, **громкий fail на старте** при ошибке схемы
+### Renderer: attract-loop + state machine
+- [x] `KioskScreen` — дискриминированный union (attract / menu / map / tour)
+- [x] `Action` — WAKE, DRILL, BACK, HOME, OPEN_TARGET, IDLE_RESET, SET_LANG
+- [x] Reducer — чистый, exhaustive через `assertNever`
+- [x] `App.tsx` — `useReducer`, подписка на `onIdleReset`, репорт `reportActivity` по `pointerdown`
+- [x] `AttractScreen.tsx` — `<video loop muted playsInline>`, hint-текст, `onPointerDown` → WAKE
+- [x] Заглушки для экранов menu / map / tour (Phase 2-4)
+- [x] `global.d.ts` — `window.kiosk: KioskApi`
+- [x] Vite config + `index.html` (CSP, `cursor: none`, `user-select: none`)
 
-### Тестовый контент
-- [x] `content/nav.json` — 2-3 узла: одна `branch`, один `leaf` с `target.kind = 'tour'`
-- [x] `content/maps.json` — один `floor`, одна `zone` → `target` тур
-- [x] `content/i18n.json` — строки chrome на `uz` (латиница, D2 TBD) / `ru` / `en`
+### Тестовый актив
+- [ ] `public/video/attract.mp4` — положить заглушку или реальный ролик после D1
 
 ### Проверка фазы
-- [x] Smoke-тест: валидный контент парсится; намеренно битый JSON падает с понятным сообщением
-- [x] `typecheck` зелёный по всем пакетам
-- [x] Зафиксировать сделанное в `CHANGELOG.md`
+- [x] `typecheck` зелёный по всем пакетам после добавления React/Vite/Electron
+- [ ] Smoke-запуск: `npm run build:main && npm run dev:renderer`, затем `npm run dev:main`
 
 ---
 
 ## Решения, которые надо снять
 
-Гейтят последующие фазы. Полный список — `ARCHITECTURE.md` → «Открытые решения».
-
-- [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 1 (видео-кодек, пакетирование).
-- [ ] **D2. Узбекский: латиница / кириллица / обе.** Влияет на `i18n.json` и шрифты. Пока: `uz` на латинице — заменить реальными строками после решения.
-- [ ] **D3. Поведение фона в интерактиве** — подтвердить затемнение/заморозку при углублении в меню.
-- [ ] D4. Источник SVG-планов этажей (готовы / рисовать).
+- [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 1 (видео-кодек, пакетирование) и Фазу 5.
+- [ ] **D2. Узбекский: латиница / кириллица / обе.** Влияет на `i18n.json` и шрифты.
+- [ ] **D3. Поведение фона в интерактиве** — подтвердить затемнение/заморозку.
+- [ ] D4. Источник SVG-планов этажей.
 - [ ] D5. Готовность 360-туров к MVP; чем закрывать листья без тура.
 
 ---
 
 ## Бэклог (разворачивать при активации)
 
-- **Фаза 1 — shell + attract.** Kiosk-окно, attract-loop, idle-сброс, типизированный IPC + watchdog. *Старт после D1.*
 - **Фаза 2 — меню.** Drill-down, i18n chrome, «Домой/Назад/крошки», переключатель языка, тач-цели 60-80 px.
-- **Фаза 3 — 2D-карта.** Рендер SVG плана, кликабельные зоны (`rect`/`polygon`), тап → `OPEN_TARGET`.
-- **Фаза 4 — туры.** Встраивание panotour viewer, deep-link `tourId`+`sceneId`, выход → `HOME`.
+- **Фаза 3 — 2D-карта.** Рендер SVG плана, кликабельные зоны, тап → `OPEN_TARGET`.
+- **Фаза 4 — туры.** Встраивание panotour viewer, deep-link, выход → HOME.
 - **Фаза 5 — закалка и сдача.** Блокировки жестов, авто-старт, пакетирование, инструкция для клиента.
