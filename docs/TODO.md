@@ -8,54 +8,41 @@
 
 ---
 
-## Сейчас — Фаза 1: shell + attract
+## Сейчас — Фаза 3: 2D-карта
 
-Цель фазы: Electron-оболочка с kiosk-окном, attract-loop видео, idle-сброс, типизированный IPC, watchdog.
+Цель фазы: рендер SVG-плана этажа, кликабельные зоны, тап → `OPEN_TARGET`.
 
-### Electron main process
-- [x] Kiosk-окно (`BrowserWindow` fullscreen/kiosk в prod, windowed в dev)
-- [x] Preload bridge (`contextBridge` + `KioskApi` facade)
-- [x] Типизированный IPC: `kiosk:reportActivity`, `kiosk:idleReset`, `kiosk:getConfig`
-- [x] `KioskConfig` с `idleTimeoutMs`, `defaultLang`, `attractVideoSrc`
-- [x] Idle-таймер в main: сброс по `reportActivity`, отправляет `kiosk:idleReset` в renderer
-- [x] `powerSaveBlocker.start('prevent-display-sleep')`
-- [x] Single-instance lock (`app.requestSingleInstanceLock`)
-- [x] Авто-рестарт renderer при падении (`webContents.on('destroyed')`)
-- [ ] Блокировки жестов (pinch-zoom, drag, F-keys) — перенести в Фазу 5
-- [ ] Авто-старт при загрузке ОС — перенести в Фазу 5 (зависит от D1)
-
-### Renderer: attract-loop + state machine
-- [x] `KioskScreen` — дискриминированный union (attract / menu / map / tour)
-- [x] `Action` — WAKE, DRILL, BACK, HOME, OPEN_TARGET, IDLE_RESET, SET_LANG
-- [x] Reducer — чистый, exhaustive через `assertNever`
-- [x] `App.tsx` — `useReducer`, подписка на `onIdleReset`, репорт `reportActivity` по `pointerdown`
-- [x] `AttractScreen.tsx` — `<video loop muted playsInline>`, hint-текст, `onPointerDown` → WAKE
-- [x] Заглушки для экранов menu / map / tour (Phase 2-4)
-- [x] `global.d.ts` — `window.kiosk: KioskApi`
-- [x] Vite config + `index.html` (CSP, `cursor: none`, `user-select: none`)
+- [ ] `MapScreen.tsx` — компонент экрана карты
+- [ ] Рендеринг SVG через `<img>` или инлайн-SVG с наложенными зонами
+- [ ] Поддержка `ZoneShape`: `rect` и `polygon`
+- [ ] Тап по зоне → `dispatch({ type: 'OPEN_TARGET', target: zone.target })`
+- [ ] Кнопка «Домой» (NavBar переиспользуется или минимальная шапка)
+- [ ] Заглушка `content/maps.json` с реальными координатами (зависит от D4)
 
 ### Тестовый актив
 - [ ] `public/video/attract.mp4` — положить заглушку или реальный ролик после D1
+- [ ] SVG-план этажа — после решения D4
 
 ### Проверка фазы
-- [x] `typecheck` зелёный по всем пакетам после добавления React/Vite/Electron
-- [ ] Smoke-запуск: `npm run build:main && npm run dev:renderer`, затем `npm run dev:main`
+- [ ] Клик по зоне `rect` → правильный `target` через `assertNever`-покрытый reducer
+- [ ] `typecheck` зелёный
 
 ---
 
 ## Решения, которые надо снять
 
-- [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 1 (видео-кодек, пакетирование) и Фазу 5.
-- [ ] **D2. Узбекский: латиница / кириллица / обе.** Влияет на `i18n.json` и шрифты.
-- [ ] **D3. Поведение фона в интерактиве** — подтвердить затемнение/заморозку.
-- [ ] D4. Источник SVG-планов этажей.
-- [ ] D5. Готовность 360-туров к MVP; чем закрывать листья без тура.
+- [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 5.
+- [x] **D2. Узбекский: латиница / кириллица / обе.** — Латиница. Принято 2026-06-17.
+- [x] **D3. Поведение фона в интерактиве.** — Видео всегда играет; при входе в меню
+  затемнение 0.42; при нажатии кнопки видео паузируется + затемнение 0.72/0.80;
+  через 5 сек без действий — сброс в attract (видео снова играет). Принято 2026-06-17.
+- [ ] **D4. Источник SVG-планов этажей.**
+- [ ] **D5. Готовность 360-туров к MVP; чем закрывать листья без тура.**
 
 ---
 
 ## Бэклог (разворачивать при активации)
 
-- **Фаза 2 — меню.** Drill-down, i18n chrome, «Домой/Назад/крошки», переключатель языка, тач-цели 60-80 px.
-- **Фаза 3 — 2D-карта.** Рендер SVG плана, кликабельные зоны, тап → `OPEN_TARGET`.
 - **Фаза 4 — туры.** Встраивание panotour viewer, deep-link, выход → HOME.
-- **Фаза 5 — закалка и сдача.** Блокировки жестов, авто-старт, пакетирование, инструкция для клиента.
+- **Фаза 5 — закалка и сдача.** Блокировки жестов, авто-старт, пакетирование,
+  инструкция для клиента. Блокируется D1.

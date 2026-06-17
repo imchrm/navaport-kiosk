@@ -1,7 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { navSchema, mapsSchema, i18nSchema } from './schema.js';
-import type { MenuNode, FloorMap } from './types.js';
-import type { I18nDict } from './schema.js';
+import type { ContentBundle } from './types.js';
 
 function readJson(filePath: string): unknown {
   try {
@@ -14,14 +13,7 @@ function readJson(filePath: string): unknown {
 
 function parseOrDie<T>(schema: { parse: (data: unknown) => T }, data: unknown, label: string): T {
   const result = schema.parse(data);
-  // parse() throws ZodError on failure with a detailed message — no extra wrapping needed.
   return result;
-}
-
-export interface ContentBundle {
-  readonly nav: readonly MenuNode[];
-  readonly maps: readonly FloorMap[];
-  readonly i18n: I18nDict;
 }
 
 export function loadContent(contentDir: string): ContentBundle {
