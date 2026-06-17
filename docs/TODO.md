@@ -1,4 +1,4 @@
-# TODO.md — Airport Wayfinding Kiosk
+# TODO.md — navaport-kiosk
 
 > Статус: **rolling**. Активная фаза — детально; будущие — крупными строками,
 > разворачивать в задачи при переходе. Источник фаз — `ARCHITECTURE.md` §12.
@@ -14,28 +14,28 @@
 тестовый контент. Кода UI/Electron ещё нет.
 
 ### Репозиторий и тулчейн
-- [ ] `package.json` с `workspaces` (`packages/*`)
-- [ ] `tsconfig.base.json` — `strict: true`, плюс `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`
-- [ ] ESLint + Prettier, `.editorconfig` (UTF-8, LF)
-- [ ] Скелеты пакетов: `contract`, `content`, `main`, `renderer` (только `package.json` + `tsconfig` + пустой `src/index.ts`)
-- [ ] `npm run typecheck` как агрегирующий скрипт по всем пакетам
+- [x] `package.json` с `workspaces` (`packages/*`)
+- [x] `tsconfig.base.json` — `strict: true`, плюс `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`
+- [x] ESLint + Prettier, `.editorconfig` (UTF-8, LF)
+- [x] Скелеты пакетов: `contract`, `content`, `main`, `renderer` (только `package.json` + `tsconfig` + пустой `src/index.ts`)
+- [x] `npm run typecheck` как агрегирующий скрипт по всем пакетам
 
 ### Пакет `content`
-- [ ] `types.ts` — перенести типы из `ARCHITECTURE.md` §6 (`Localized`, `NavTarget`, `MenuNode`, `FloorMap`, `MapZone`, `ZoneShape`)
-- [ ] `assertNever` helper
-- [ ] `schema.ts` — Zod-схемы: `navTarget` (discriminatedUnion), `floorMap`, `navSchema`
-- [ ] Аккуратно типизировать рекурсивную схему меню (`z.lazy`) — известная капризность Zod, не оставлять `ZodType<unknown>`
-- [ ] `load.ts` — чтение JSON + валидация, **громкий fail на старте** при ошибке схемы
+- [x] `types.ts` — перенести типы из `ARCHITECTURE.md` §6 (`Localized`, `NavTarget`, `MenuNode`, `FloorMap`, `MapZone`, `ZoneShape`)
+- [x] `assertNever` helper
+- [x] `schema.ts` — Zod-схемы: `navTarget` (discriminatedUnion), `floorMap`, `navSchema`
+- [x] Аккуратно типизировать рекурсивную схему меню (`z.lazy`) — без `ZodType<unknown>`, с явным `ZodType<MenuNode, ZodTypeDef, unknown>` и комментарием про Zod v3
+- [x] `load.ts` — чтение JSON + валидация, **громкий fail на старте** при ошибке схемы
 
 ### Тестовый контент
-- [ ] `content/nav.json` — 2-3 узла: одна `branch`, один `leaf` с `target.kind = 'tour'`
-- [ ] `content/maps.json` — один `floor`, одна `zone` → `target` тур
-- [ ] `content/i18n.json` — строки chrome на `uz` / `ru` / `en` (узбекская раскладка — см. блокер D2)
+- [x] `content/nav.json` — 2-3 узла: одна `branch`, один `leaf` с `target.kind = 'tour'`
+- [x] `content/maps.json` — один `floor`, одна `zone` → `target` тур
+- [x] `content/i18n.json` — строки chrome на `uz` (латиница, D2 TBD) / `ru` / `en`
 
 ### Проверка фазы
-- [ ] Smoke-тест: валидный контент парсится; намеренно битый JSON падает с понятным сообщением
-- [ ] `typecheck` зелёный по всем пакетам
-- [ ] Зафиксировать сделанное в `CHANGELOG.md`
+- [x] Smoke-тест: валидный контент парсится; намеренно битый JSON падает с понятным сообщением
+- [x] `typecheck` зелёный по всем пакетам
+- [x] Зафиксировать сделанное в `CHANGELOG.md`
 
 ---
 
@@ -44,7 +44,7 @@
 Гейтят последующие фазы. Полный список — `ARCHITECTURE.md` → «Открытые решения».
 
 - [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 1 (видео-кодек, пакетирование).
-- [ ] **D2. Узбекский: латиница / кириллица / обе.** Влияет на `i18n.json` и шрифты — задевает уже Фазу 0.
+- [ ] **D2. Узбекский: латиница / кириллица / обе.** Влияет на `i18n.json` и шрифты. Пока: `uz` на латинице — заменить реальными строками после решения.
 - [ ] **D3. Поведение фона в интерактиве** — подтвердить затемнение/заморозку при углублении в меню.
 - [ ] D4. Источник SVG-планов этажей (готовы / рисовать).
 - [ ] D5. Готовность 360-туров к MVP; чем закрывать листья без тура.

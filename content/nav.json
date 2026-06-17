@@ -1,0 +1,41 @@
+[
+  {
+    "kind": "branch",
+    "id": "gates",
+    "title": {
+      "uz": "Yo'lak eshiklari",
+      "ru": "Выходы на посадку",
+      "en": "Departure Gates"
+    },
+    "children": [
+      {
+        "kind": "leaf",
+        "id": "gate-a1",
+        "title": {
+          "uz": "A1 eshigi",
+          "ru": "Выход A1",
+          "en": "Gate A1"
+        },
+        "target": {
+          "kind": "tour",
+          "tourId": "terminal-a",
+          "sceneId": "gate-a1-entrance"
+        }
+      }
+    ]
+  },
+  {
+    "kind": "leaf",
+    "id": "checkin",
+    "title": {
+      "uz": "Ro'yxatdan o'tish",
+      "ru": "Стойки регистрации",
+      "en": "Check-in Desks"
+    },
+    "target": {
+      "kind": "tour",
+      "tourId": "terminal-a",
+      "sceneId": "checkin-hall"
+    }
+  }
+]
