@@ -53,6 +53,7 @@ describe('mapsSchema rejects invalid data', () => {
         id: 'f1',
         title: { uz: '', ru: '', en: '' },
         svgAsset: 'a.svg',
+        viewBox: '0 0 1000 600',
         zones: [
           {
             id: 'z1',

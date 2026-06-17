@@ -7,6 +7,7 @@
       "en": "Floor 1"
     },
     "svgAsset": "assets/maps/floor-1.svg",
+    "viewBox": "0 0 1000 600",
     "zones": [
       {
         "id": "zone-checkin",
@@ -17,15 +18,52 @@
         },
         "shape": {
           "kind": "rect",
-          "x": 100,
-          "y": 200,
+          "x": 80,
+          "y": 180,
           "w": 300,
-          "h": 150
+          "h": 170
         },
         "target": {
           "kind": "tour",
           "tourId": "terminal-a",
           "sceneId": "checkin-hall"
+        }
+      },
+      {
+        "id": "zone-security",
+        "title": {
+          "uz": "Xavfsizlik",
+          "ru": "Досмотр",
+          "en": "Security"
+        },
+        "shape": {
+          "kind": "polygon",
+          "points": [[420, 260], [580, 260], [580, 390], [420, 390]]
+        },
+        "target": {
+          "kind": "tour",
+          "tourId": "terminal-a",
+          "sceneId": "security-lane"
+        }
+      },
+      {
+        "id": "zone-gates",
+        "title": {
+          "uz": "Eshiklar",
+          "ru": "Выходы",
+          "en": "Gates"
+        },
+        "shape": {
+          "kind": "rect",
+          "x": 600,
+          "y": 100,
+          "w": 300,
+          "h": 400
+        },
+        "target": {
+          "kind": "tour",
+          "tourId": "terminal-a",
+          "sceneId": "gates-overview"
         }
       }
     ]

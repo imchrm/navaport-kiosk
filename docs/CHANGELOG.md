@@ -46,6 +46,25 @@
 - Smoke-тест `packages/content/src/__tests__/load.test.ts` (vitest): 8 кейсов — валидный контент, ветка/лист, зона-тур, невалидный kind, пропущенные поля. Все зелёные.
 - `typecheck` зелёный по всем четырём пакетам.
 
+### Added (2026-06-17) — Фаза 3: 2D-карта
+
+**content:**
+- `FloorMap` получил поле `readonly viewBox: string` (координатное пространство SVG);
+  Zod-схема обновлена; тест-фикстура для `mapsSchema` дополнена.
+- `content/maps.json` расширен: 3 зоны на `floor-1` — `rect` (check-in), `polygon`
+  (security), `rect` (gates); добавлен `"viewBox": "0 0 1000 600"`.
+
+**renderer:**
+- `MapScreen.tsx` — экран карты: `<svg viewBox>` с `<image>` для плана этажа и SVG-
+  оверлеями зон (`<rect>`/`<polygon>`). Exhaustive `assertNever` на `ZoneShape`.
+- `ZoneHit` — тап активирует `OPEN_TARGET`; pressed-состояние (золотистая заливка);
+  подпись в центре зоны через `<text dominantBaseline="middle">`.
+- `App.tsx` — placeholder карты заменён на `MapScreen`; поиск карты по `floorId`
+  из `content.maps` (not found → null, не крашится).
+- `renderer/public/assets/maps/floor-1.svg` — схематичный placeholder-план терминала
+  (тот же viewBox 0 0 1000 600; заменяется реальным SVG после D4).
+- `typecheck` зелёный по всем пакетам; content smoke-тесты 8/8 зелёных.
+
 ### Added (2026-06-17) — Фаза 2: меню
 
 **Решения зафиксированы:**
