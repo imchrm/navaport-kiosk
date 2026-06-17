@@ -2,40 +2,63 @@
   {
     "kind": "branch",
     "id": "gates",
-    "title": {
-      "uz": "Yo'lak eshiklari",
-      "ru": "Выходы на посадку",
-      "en": "Departure Gates"
-    },
+    "title": { "uz": "Yo'lak eshiklari", "ru": "Выходы на посадку", "en": "Departure Gates" },
     "children": [
       {
         "kind": "leaf",
         "id": "gate-a1",
-        "title": {
-          "uz": "A1 eshigi",
-          "ru": "Выход A1",
-          "en": "Gate A1"
-        },
-        "target": {
-          "kind": "tour",
-          "tourId": "terminal-a",
-          "sceneId": "gate-a1-entrance"
-        }
+        "title": { "uz": "A1 eshigi", "ru": "Выход A1", "en": "Gate A1" },
+        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "gate-a1-entrance" }
+      },
+      {
+        "kind": "leaf",
+        "id": "gate-a2",
+        "title": { "uz": "A2 eshigi", "ru": "Выход A2", "en": "Gate A2" },
+        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "gate-a2-entrance" }
+      },
+      {
+        "kind": "leaf",
+        "id": "gate-b1",
+        "title": { "uz": "B1 eshigi", "ru": "Выход B1", "en": "Gate B1" },
+        "target": { "kind": "tour", "tourId": "terminal-b", "sceneId": "gate-b1-entrance" }
       }
     ]
   },
   {
     "kind": "leaf",
     "id": "checkin",
-    "title": {
-      "uz": "Ro'yxatdan o'tish",
-      "ru": "Стойки регистрации",
-      "en": "Check-in Desks"
-    },
-    "target": {
-      "kind": "tour",
-      "tourId": "terminal-a",
-      "sceneId": "checkin-hall"
-    }
+    "title": { "uz": "Ro'yxatdan o'tish", "ru": "Стойки регистрации", "en": "Check-in Desks" },
+    "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "checkin-hall" }
+  },
+  {
+    "kind": "branch",
+    "id": "services",
+    "title": { "uz": "Xizmatlar", "ru": "Услуги", "en": "Services" },
+    "children": [
+      {
+        "kind": "leaf",
+        "id": "cafe",
+        "title": { "uz": "Kafe", "ru": "Кафе", "en": "Cafe" },
+        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "cafe-entrance" }
+      },
+      {
+        "kind": "leaf",
+        "id": "pharmacy",
+        "title": { "uz": "Dorixona", "ru": "Аптека", "en": "Pharmacy" },
+        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "pharmacy" }
+      },
+      {
+        "kind": "leaf",
+        "id": "exchange",
+        "title": { "uz": "Valyuta almashinuvi", "ru": "Обмен валюты", "en": "Currency Exchange" },
+        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "exchange-office" }
+      }
+    ]
+  },
+  {
+    "kind": "leaf",
+    "id": "map",
+    "title": { "uz": "Xarita", "ru": "Карта", "en": "Map" },
+    "target": { "kind": "location", "mapId": "floor-1", "zoneId": "" }
   }
 ]

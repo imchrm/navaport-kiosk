@@ -46,6 +46,34 @@
 - Smoke-тест `packages/content/src/__tests__/load.test.ts` (vitest): 8 кейсов — валидный контент, ветка/лист, зона-тур, невалидный kind, пропущенные поля. Все зелёные.
 - `typecheck` зелёный по всем четырём пакетам.
 
+### Added (2026-06-17) — Фаза 2: меню
+
+**Решения зафиксированы:**
+- D2 закрыт: узбекский язык — латиница.
+- D3 закрыт: видео-фон всегда проигрывается; attract — без затемнения; menu root —
+  overlay 0.42; при нажатии кнопки видео паузируется + overlay 0.72 (menu sub) / 0.80
+  (map/tour); idle 5 с → сброс в attract. Меню появляется автоматически через 3 с.
+
+**content:**
+- `ContentBundle` вынесен из `load.ts` в `types.ts` — разрывает транзитивную зависимость
+  renderer на `node:fs`; `index.ts` экспортирует тип из `types.ts`.
+
+**renderer:**
+- `App.tsx` переработан: видео-фон всегда рендерится на уровне App с `videoRef`;
+  `overlayOpacity()` и `videoPaused()` управляют overlay и play/pause через `useEffect`;
+  `parseContent(raw)` валидирует IPC-данные Zod-схемами; загрузка config + content —
+  `Promise.all` при монтировании; авто-WAKE через 3 с в состоянии attract.
+- `AttractScreen.tsx` упрощён: только hint-текст поверх видео (видео перенесено в App).
+- `screens/MenuScreen.tsx` — drill-down меню: `getNodesAtPath`, `getBreadcrumbs`,
+  сетка тайлов (`minHeight: 160px`), `Tile` c pressed-состоянием; branch → DRILL,
+  leaf → OPEN_TARGET; `key={path.join('/')}` для ре-анимации при переходах.
+- `components/NavBar.tsx` — шапка 80 px: переключатель языка (uz/ru/en),
+  хлебные крошки, кнопки «Домой» / «Назад».
+- `hooks/useI18n.ts` — хелпер `t(i18n, lang, key)` с fallback к ключу.
+- `styles.css` — `@keyframes slide-up` + `@keyframes fade-in`; классы `.menu-enter`,
+  `.fade-in`.
+- `typecheck` зелёный по всем четырём пакетам; content smoke-тесты 8/8 зелёных.
+
 ### Added (2026-06-17) — Фаза 1: shell + attract
 
 **contract:**
