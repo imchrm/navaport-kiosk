@@ -1,4 +1,4 @@
-# CONTEXT.md — Airport Wayfinding Kiosk
+# CONTEXT.md — navaport-kiosk
 
 > Читается первым — это входная дверь в проект (в том числе для Claude Code).
 > Назначение: дать снимок «что это, где мы сейчас, как здесь работать».
