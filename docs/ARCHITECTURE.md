@@ -1,6 +1,6 @@
 # ARCHITECTURE.md — Airport Wayfinding Kiosk
 
-> Рабочее имя проекта: `airport-kiosk` (заменить на имя клиента/тендера).
+> Рабочее имя проекта: `navaport-kiosk`.
 > Статус документа: **stable**. Изменения архитектуры фиксируются здесь.
 > Текущие нерешённые развилки — в разделе [Открытые решения](#открытые-решения) (**rolling**).
 
@@ -42,7 +42,7 @@
 npm workspaces, как в `panotour`. Жёсткое разделение по процессам и ответственности.
 
 ```
-airport-kiosk/
+navaport-kiosk/
   package.json                 # workspaces
   tsconfig.base.json           # strict: true, общие compilerOptions
   packages/

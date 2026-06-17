@@ -1,0 +1,29 @@
+{
+  "uz": {
+    "nav.back": "Orqaga",
+    "nav.home": "Bosh sahifa",
+    "nav.map": "Xarita",
+    "lang.uz": "O'zbekcha",
+    "lang.ru": "Ruscha",
+    "lang.en": "Inglizcha",
+    "attract.hint": "Ekranga bosing"
+  },
+  "ru": {
+    "nav.back": "Назад",
+    "nav.home": "Главная",
+    "nav.map": "Карта",
+    "lang.uz": "Узбекский",
+    "lang.ru": "Русский",
+    "lang.en": "Английский",
+    "attract.hint": "Коснитесь экрана"
+  },
+  "en": {
+    "nav.back": "Back",
+    "nav.home": "Home",
+    "nav.map": "Map",
+    "lang.uz": "Uzbek",
+    "lang.ru": "Russian",
+    "lang.en": "English",
+    "attract.hint": "Touch the screen"
+  }
+}
