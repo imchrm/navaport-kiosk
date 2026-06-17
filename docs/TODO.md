@@ -22,7 +22,7 @@
 - [x] Заглушка `renderer/public/assets/maps/floor-1.svg` — схематичный план терминала
 
 ### Тестовый актив
-- [ ] `public/video/attract.mp4` — положить заглушку или реальный ролик после D1
+- [x] `public/video/attract.mp4` — видео добавлено (MP4, 13 МБ, portrait)
 - [ ] Заменить placeholder SVG реальным планом после решения D4
 
 ### Проверка фазы
