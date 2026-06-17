@@ -1,3 +1,5 @@
+import type { I18nDict } from './schema.js';
+
 export type LangCode = 'uz' | 'ru' | 'en';
 export type Localized = Readonly<Record<LangCode, string>>;
 
@@ -41,4 +43,10 @@ export interface FloorMap {
   readonly title: Localized;
   readonly svgAsset: string;
   readonly zones: readonly MapZone[];
+}
+
+export interface ContentBundle {
+  readonly nav: readonly MenuNode[];
+  readonly maps: readonly FloorMap[];
+  readonly i18n: I18nDict;
 }

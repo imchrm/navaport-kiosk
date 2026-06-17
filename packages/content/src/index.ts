@@ -1,4 +1,4 @@
-// Browser-safe exports: types, assertNever, and Zod schemas.
+// Browser-safe exports: types, assertNever, Zod schemas.
 // loadContent (Node.js only) lives in ./load.ts — import it directly in the main process.
 export type {
   LangCode,
@@ -10,6 +10,7 @@ export type {
   ZoneShape,
   MapZone,
   FloorMap,
+  ContentBundle,
 } from './types.js';
 export { assertNever } from './assertNever.js';
 export { navSchema, mapsSchema, i18nSchema } from './schema.js';

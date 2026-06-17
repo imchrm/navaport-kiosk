@@ -17,6 +17,10 @@ const api: KioskApi = {
   getConfig(): Promise<KioskConfig> {
     return ipcRenderer.invoke('kiosk:getConfig') as Promise<KioskConfig>;
   },
+
+  getContent(): Promise<unknown> {
+    return ipcRenderer.invoke('kiosk:getContent') as Promise<unknown>;
+  },
 };
 
 contextBridge.exposeInMainWorld('kiosk', api);
