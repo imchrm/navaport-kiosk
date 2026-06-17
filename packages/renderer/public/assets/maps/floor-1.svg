@@ -1,54 +1,70 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1000" width="600" height="1000">
   <!-- Background -->
-  <rect width="1000" height="600" fill="#141824"/>
+  <rect width="600" height="1000" fill="#141824"/>
 
   <!-- Outer walls -->
-  <rect x="40" y="40" width="920" height="520" fill="none" stroke="#3a4a6a" stroke-width="3" rx="4"/>
+  <rect x="30" y="30" width="540" height="940" fill="none" stroke="#3a4a6a" stroke-width="3" rx="4"/>
 
-  <!-- Left wing (check-in) -->
-  <rect x="60" y="160" width="340" height="240" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
+  <!-- Upper section divider -->
+  <line x1="30" y1="400" x2="570" y2="400" stroke="#2a3a5a" stroke-width="1.5" stroke-dasharray="6,5"/>
+
+  <!-- Check-in wing (upper left) -->
+  <rect x="40" y="60" width="250" height="310" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
   <!-- Check-in counters -->
-  <rect x="85" y="300" width="280" height="16" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
-  <rect x="85" y="325" width="280" height="16" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
-  <rect x="85" y="350" width="280" height="16" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
+  <rect x="55" y="260" width="220" height="14" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
+  <rect x="55" y="283" width="220" height="14" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
+  <rect x="55" y="306" width="220" height="14" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
+  <!-- Desk labels -->
+  <text x="165" y="160" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="11" letter-spacing="2">CHECK-IN</text>
 
-  <!-- Central corridor -->
-  <rect x="400" y="80" width="120" height="440" fill="#16202f" stroke="#2a3a5a" stroke-width="1"/>
-
-  <!-- Security checkpoint -->
-  <rect x="415" y="255" width="175" height="140" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
+  <!-- Security wing (upper right) -->
+  <rect x="310" y="60" width="250" height="310" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
   <!-- Security lanes -->
-  <line x1="450" y1="270" x2="450" y2="380" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
-  <line x1="490" y1="270" x2="490" y2="380" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
-  <line x1="530" y1="270" x2="530" y2="380" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="355" y1="80" x2="355" y2="355" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="400" y1="80" x2="400" y2="355" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="445" y1="80" x2="445" y2="355" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="490" y1="80" x2="490" y2="355" stroke="#2a3a5a" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- X-ray tables -->
+  <rect x="320" y="200" width="220" height="30" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1"/>
+  <text x="430" y="160" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="11" letter-spacing="2">SECURITY</text>
 
-  <!-- Right wing (gates) -->
-  <rect x="580" y="80" width="340" height="440" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
+  <!-- Central passage -->
+  <rect x="270" y="60" width="40" height="310" fill="#16202f" stroke="#2a3a5a" stroke-width="1"/>
+  <rect x="270" y="415" width="40" height="555" fill="#16202f" stroke="#2a3a5a" stroke-width="1"/>
+
+  <!-- Gates hall (lower) -->
+  <rect x="40" y="420" width="520" height="540" fill="#1a2035" stroke="#2a3a5a" stroke-width="1.5"/>
+
   <!-- Gate pods -->
-  <rect x="600" y="110" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="690" y="110" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="780" y="110" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="600" y="190" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="690" y="190" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="780" y="190" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="600" y="270" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="690" y="270" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="780" y="270" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="600" y="350" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="690" y="350" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
-  <rect x="780" y="350" width="70" height="50" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="60" y="450" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="175" y="450" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="290" y="450" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="405" y="450" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+
+  <rect x="60" y="540" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="175" y="540" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="290" y="540" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="405" y="540" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+
+  <rect x="60" y="630" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="175" y="630" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="290" y="630" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
+  <rect x="405" y="630" width="90" height="60" fill="#1e2d45" stroke="#2a3a5a" stroke-width="1" rx="2"/>
 
   <!-- Gate labels -->
-  <text x="635" y="140" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A1</text>
-  <text x="725" y="140" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A2</text>
-  <text x="815" y="140" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A3</text>
-  <text x="635" y="220" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B1</text>
-  <text x="725" y="220" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B2</text>
-  <text x="815" y="220" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B3</text>
+  <text x="105" y="485" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A1</text>
+  <text x="220" y="485" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A2</text>
+  <text x="335" y="485" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B1</text>
+  <text x="450" y="485" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B2</text>
+  <text x="105" y="575" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A3</text>
+  <text x="220" y="575" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">A4</text>
+  <text x="335" y="575" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B3</text>
+  <text x="450" y="575" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="12">B4</text>
+
+  <!-- Gates section label -->
+  <text x="300" y="730" text-anchor="middle" fill="#2a3a5a" font-family="sans-serif" font-size="11" letter-spacing="3">DEPARTURE GATES</text>
 
   <!-- Entry doorway -->
-  <rect x="430" y="542" width="60" height="18" fill="#1e2d45" stroke="#3a5a8a" stroke-width="2"/>
-
-  <!-- Floor label -->
-  <text x="500" y="580" text-anchor="middle" fill="#1e2d45" font-family="sans-serif" font-size="11" letter-spacing="3">TERMINAL 1</text>
+  <rect x="275" y="962" width="50" height="18" fill="#1e2d45" stroke="#3a5a8a" stroke-width="2"/>
+  <text x="300" y="992" text-anchor="middle" fill="#1e2d45" font-family="sans-serif" font-size="10" letter-spacing="3">ENTRANCE</text>
 </svg>

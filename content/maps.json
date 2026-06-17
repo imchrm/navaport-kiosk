@@ -7,7 +7,7 @@
       "en": "Floor 1"
     },
     "svgAsset": "assets/maps/floor-1.svg",
-    "viewBox": "0 0 1000 600",
+    "viewBox": "0 0 600 1000",
     "zones": [
       {
         "id": "zone-checkin",
@@ -18,10 +18,10 @@
         },
         "shape": {
           "kind": "rect",
-          "x": 80,
-          "y": 180,
-          "w": 300,
-          "h": 170
+          "x": 50,
+          "y": 80,
+          "w": 230,
+          "h": 280
         },
         "target": {
           "kind": "tour",
@@ -38,7 +38,7 @@
         },
         "shape": {
           "kind": "polygon",
-          "points": [[420, 260], [580, 260], [580, 390], [420, 390]]
+          "points": [[310, 80], [540, 80], [540, 360], [310, 360]]
         },
         "target": {
           "kind": "tour",
@@ -55,10 +55,10 @@
         },
         "shape": {
           "kind": "rect",
-          "x": 600,
-          "y": 100,
-          "w": 300,
-          "h": 400
+          "x": 50,
+          "y": 440,
+          "w": 500,
+          "h": 490
         },
         "target": {
           "kind": "tour",
