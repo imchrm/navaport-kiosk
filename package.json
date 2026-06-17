@@ -9,11 +9,16 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint packages/*/src/**/*.ts packages/*/src/**/*.tsx --max-warnings 0",
-    "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,json}\""
+    "format": "prettier --write \"packages/*/src/**/*.{ts,tsx,json}\"",
+    "build:main": "npm run build --workspace=@navaport/main",
+    "build:renderer": "npm run build --workspace=@navaport/renderer",
+    "dev:renderer": "npm run dev --workspace=@navaport/renderer",
+    "dev:main": "cross-env NODE_ENV=development ELECTRON_DEV_URL=http://localhost:5173 electron packages/main/dist/index.js"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^9.0.0",
     "prettier": "^3.3.0",
     "typescript": "^5.5.0",
