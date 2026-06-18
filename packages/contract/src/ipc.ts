@@ -3,6 +3,8 @@ export interface KioskConfig {
   readonly defaultLang: 'uz' | 'ru' | 'en';
   // Path relative to renderer's index.html. Codec TBD — see open decision D1.
   readonly attractVideoSrc: string;
+  // Base URL for tour iframes: `${tourBaseUrl}/${tourId}?lang=XX&scene=YY`
+  readonly tourBaseUrl: string;
 }
 
 export interface KioskApi {

@@ -25,8 +25,8 @@
         },
         "target": {
           "kind": "tour",
-          "tourId": "terminal-a",
-          "sceneId": "checkin-hall"
+          "tourId": "neoclassicalbedroom",
+          "sceneId": ""
         }
       },
       {
@@ -42,8 +42,8 @@
         },
         "target": {
           "kind": "tour",
-          "tourId": "terminal-a",
-          "sceneId": "security-lane"
+          "tourId": "test",
+          "sceneId": ""
         }
       },
       {
@@ -62,8 +62,8 @@
         },
         "target": {
           "kind": "tour",
-          "tourId": "terminal-a",
-          "sceneId": "gates-overview"
+          "tourId": "test2",
+          "sceneId": ""
         }
       }
     ]

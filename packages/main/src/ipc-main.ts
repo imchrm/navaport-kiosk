@@ -8,6 +8,8 @@ const config: KioskConfig = {
   defaultLang: 'ru',
   // Replace with actual video once D1 (target OS / hardware codec) is resolved.
   attractVideoSrc: 'video/attract.mp4',
+  // Switch to local path (e.g. http://localhost:PORT/tours) for production deployment.
+  tourBaseUrl: 'https://360tur.uz/tours',
 };
 
 // Phase 2: raw read + pass to renderer for Zod validation.

@@ -8,19 +8,19 @@
         "kind": "leaf",
         "id": "gate-a1",
         "title": { "uz": "A1 eshigi", "ru": "Выход A1", "en": "Gate A1" },
-        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "gate-a1-entrance" }
+        "target": { "kind": "tour", "tourId": "neoclassicalbedroom", "sceneId": "gate-a1" }
       },
       {
         "kind": "leaf",
         "id": "gate-a2",
         "title": { "uz": "A2 eshigi", "ru": "Выход A2", "en": "Gate A2" },
-        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "gate-a2-entrance" }
+        "target": { "kind": "tour", "tourId": "test", "sceneId": "gate-a2" }
       },
       {
         "kind": "leaf",
         "id": "gate-b1",
         "title": { "uz": "B1 eshigi", "ru": "Выход B1", "en": "Gate B1" },
-        "target": { "kind": "tour", "tourId": "terminal-b", "sceneId": "gate-b1-entrance" }
+        "target": { "kind": "tour", "tourId": "test2", "sceneId": "gate-b1" }
       }
     ]
   },
@@ -28,7 +28,7 @@
     "kind": "leaf",
     "id": "checkin",
     "title": { "uz": "Ro'yxatdan o'tish", "ru": "Стойки регистрации", "en": "Check-in Desks" },
-    "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "checkin-hall" }
+    "target": { "kind": "tour", "tourId": "neoclassicalbedroom", "sceneId": "" }
   },
   {
     "kind": "branch",
@@ -39,19 +39,19 @@
         "kind": "leaf",
         "id": "cafe",
         "title": { "uz": "Kafe", "ru": "Кафе", "en": "Cafe" },
-        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "cafe-entrance" }
+        "target": { "kind": "tour", "tourId": "test", "sceneId": "" }
       },
       {
         "kind": "leaf",
         "id": "pharmacy",
         "title": { "uz": "Dorixona", "ru": "Аптека", "en": "Pharmacy" },
-        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "pharmacy" }
+        "target": { "kind": "tour", "tourId": "test2", "sceneId": "" }
       },
       {
         "kind": "leaf",
         "id": "exchange",
         "title": { "uz": "Valyuta almashinuvi", "ru": "Обмен валюты", "en": "Currency Exchange" },
-        "target": { "kind": "tour", "tourId": "terminal-a", "sceneId": "exchange-office" }
+        "target": { "kind": "tour", "tourId": "neoclassicalbedroom", "sceneId": "" }
       }
     ]
   },

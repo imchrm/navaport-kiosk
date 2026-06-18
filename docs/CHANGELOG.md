@@ -46,6 +46,29 @@
 - Smoke-тест `packages/content/src/__tests__/load.test.ts` (vitest): 8 кейсов — валидный контент, ветка/лист, зона-тур, невалидный kind, пропущенные поля. Все зелёные.
 - `typecheck` зелёный по всем четырём пакетам.
 
+### Added (2026-06-18) — Фаза 4: туры
+
+**contract:**
+- `KioskConfig.tourBaseUrl: string` — базовый URL viewer'а; для демо `https://360tur.uz/tours`,
+  для продакшна переключается на локальный статический сервер.
+
+**main:**
+- `ipc-main.ts` — `tourBaseUrl: 'https://360tur.uz/tours'` добавлен в дефолтный конфиг.
+- `window.ts` — dev-окно исправлено на portrait 540×960 (в prod fullscreen без изменений).
+
+**renderer:**
+- `TourScreen.tsx` — полноэкранный `<iframe>` с URL `${tourBaseUrl}/${tourId}?lang=XX&scene=YY`;
+  `postMessage` listener (`TOUR_EXIT` → HOME); fallback-кнопка «‹» (top-left, 64×64px)
+  пока panotour не реализует собственный выход.
+- `App.tsx` — placeholder тура заменён на `TourScreen`.
+- `index.html` CSP — добавлен `frame-src https://360tur.uz`; `media-src` расширен `blob:`.
+
+**content:**
+- `nav.json` — tourId обновлены до реальных путей 360tur.uz:
+  `neoclassicalbedroom`, `test`, `test2`; sceneId оставлены для будущей реализации в panotour.
+- `maps.json` — зоны карты привязаны к тем же tourId.
+- `typecheck` зелёный; smoke-тесты 8/8.
+
 ### Added (2026-06-17) — Фаза 3: 2D-карта
 
 **content:**

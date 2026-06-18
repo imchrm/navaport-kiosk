@@ -8,8 +8,8 @@ export function createWindow(): BrowserWindow {
   const preloadPath = path.join(__dirname, 'preload.js');
 
   const win = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width: isDev ? 540 : 1080,
+    height: isDev ? 960 : 1920,
     fullscreen: !isDev,
     kiosk: !isDev,
     frame: isDev,
