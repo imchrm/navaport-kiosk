@@ -43,8 +43,20 @@
 
 ---
 
+## Сейчас — Фаза 4: туры
+
+- [x] `TourScreen.tsx` — полноэкранный iframe; URL: `${tourBaseUrl}/${tourId}?lang=XX&scene=YY`
+- [x] `postMessage` listener: `{ type: 'TOUR_EXIT' }` → HOME
+- [x] Fallback-кнопка «‹» поверх iframe (пока panotour не реализует TOUR_EXIT)
+- [x] `KioskConfig.tourBaseUrl` добавлен в contract и ipc-main
+- [x] `nav.json` — tourId обновлены до реальных путей 360tur.uz
+- [x] `maps.json` — зоны привязаны к реальным tourId
+- [x] CSP обновлён: `frame-src https://360tur.uz`
+- [x] Dev-окно исправлено на portrait 540×960
+- [ ] Переключить `tourBaseUrl` на локальный сервер для продакшна (Фаза 5)
+- [ ] Убрать fallback-кнопку после реализации TOUR_EXIT в panotour
+
 ## Бэклог (разворачивать при активации)
 
-- **Фаза 4 — туры.** Встраивание panotour viewer, deep-link, выход → HOME.
 - **Фаза 5 — закалка и сдача.** Блокировки жестов, авто-старт, пакетирование,
-  инструкция для клиента. Блокируется D1.
+  локальный сервер туров, инструкция для клиента. Блокируется D1.

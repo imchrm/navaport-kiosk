@@ -6,6 +6,7 @@ import { reducer, initialState } from './state/screen';
 import { AttractScreen } from './screens/AttractScreen';
 import { MenuScreen } from './screens/MenuScreen';
 import { MapScreen } from './screens/MapScreen';
+import { TourScreen } from './screens/TourScreen';
 
 // --- video overlay opacity per screen state ---
 function overlayOpacity(screen: ReturnType<typeof reducer>['screen']): number {
@@ -145,10 +146,14 @@ export function App(): React.ReactElement {
         );
       })()}
 
-      {screen.kind === 'tour' && (
-        <div style={styles.placeholder} onPointerDown={() => dispatch({ type: 'HOME' })}>
-          Tour {screen.tourId} / {screen.sceneId} — Phase 4
-        </div>
+      {screen.kind === 'tour' && config !== null && (
+        <TourScreen
+          tourId={screen.tourId}
+          sceneId={screen.sceneId}
+          lang={lang}
+          tourBaseUrl={config.tourBaseUrl}
+          dispatch={dispatch}
+        />
       )}
     </div>
   );
