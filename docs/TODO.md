@@ -33,7 +33,7 @@
 
 ## Решения, которые надо снять
 
-- [ ] **D1. ОС/архитектура киоска** (Windows / Linux / ARM). Блокирует Фазу 5.
+- [x] **D1. ОС/архитектура киоска** — Windows x64. Принято 2026-06-19.
 - [x] **D2. Узбекский: латиница / кириллица / обе.** — Латиница. Принято 2026-06-17.
 - [x] **D3. Поведение фона в интерактиве.** — Видео всегда играет; при входе в меню
   затемнение 0.42; при нажатии кнопки видео паузируется + затемнение 0.72/0.80;
@@ -56,7 +56,18 @@
 - [ ] Переключить `tourBaseUrl` на локальный сервер для продакшна (Фаза 5)
 - [ ] Убрать fallback-кнопку после реализации TOUR_EXIT в panotour
 
-## Бэклог (разворачивать при активации)
+---
 
-- **Фаза 5 — закалка и сдача.** Блокировки жестов, авто-старт, пакетирование,
-  локальный сервер туров, инструкция для клиента. Блокируется D1.
+## Сейчас — Фаза 5: закалка и сдача
+
+- [x] `hardening.ts` — блокировка системных шорткатов через `globalShortcut` (F1-F12, Alt+F4, Ctrl+Shift+I, Ctrl+R, Ctrl+W, Ctrl+Shift+Esc, Alt+Esc, PrintScreen)
+- [x] `index.ts` — вызов `setupHardening()`; `app.setLoginItemSettings({ openAtLogin: true })` в prod
+- [x] `tour-server.ts` — локальный HTTP-сервер (127.0.0.1:51440) для раздачи файлов туров из `resources/tours/`
+- [x] `ipc-main.ts` — `tourBaseUrl`: `https://360tur.uz/tours` в dev, `http://localhost:51440/tours` в prod; `idleTimeoutMs` 60 000 в prod
+- [x] `ipc-main.ts` — путь к content: `__dirname/../../../content` в dev, `process.resourcesPath/content` в prod
+- [x] CSP обновлён: `frame-src` добавлен `http://localhost:51440`
+- [x] `electron-builder.json5` — Windows NSIS + portable; `extraResources`: `content/`, `tours/`
+- [x] `package.json` (root) — `"main"`, скрипты `build`, `pack`, `dist`; devDeps `electron`, `electron-builder`
+- [ ] Заполнить `tours/` бандлами panotour перед финальной упаковкой
+- [ ] Добавить `build-resources/icon.ico` (256×256) перед финальной упаковкой
+- [ ] Убрать fallback-кнопку «‹» из TourScreen после реализации `TOUR_EXIT` в panotour

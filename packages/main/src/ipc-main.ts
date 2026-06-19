@@ -2,19 +2,20 @@ import { ipcMain } from 'electron';
 import fs from 'node:fs';
 import path from 'node:path';
 import type { KioskConfig } from '@navaport/contract';
+import { TOUR_SERVER_BASE_URL } from './tour-server';
+
+const isDev = process.env['NODE_ENV'] === 'development';
 
 const config: KioskConfig = {
-  idleTimeoutMs: 5_000,
+  idleTimeoutMs: isDev ? 5_000 : 60_000,
   defaultLang: 'ru',
-  // Replace with actual video once D1 (target OS / hardware codec) is resolved.
   attractVideoSrc: 'video/attract.mp4',
-  // Switch to local path (e.g. http://localhost:PORT/tours) for production deployment.
-  tourBaseUrl: 'https://360tur.uz/tours',
+  tourBaseUrl: isDev ? 'https://360tur.uz/tours' : TOUR_SERVER_BASE_URL,
 };
 
-// Phase 2: raw read + pass to renderer for Zod validation.
-// TODO Phase 5: validate here too once CJS/ESM interop is sorted.
-const contentDir = path.join(__dirname, '../../../content');
+const contentDir = isDev
+  ? path.join(__dirname, '../../../content')
+  : path.join(process.resourcesPath, 'content');
 
 function readRawContent(): unknown {
   const read = (file: string): unknown =>
