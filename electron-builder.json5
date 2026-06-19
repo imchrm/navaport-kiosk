@@ -1,0 +1,40 @@
+{
+  appId: "uz.navaport.kiosk",
+  productName: "Navaport Kiosk",
+
+  directories: {
+    output: "dist-electron",
+  },
+
+  // Only compiled output goes into the asar; sources are not needed at runtime.
+  files: [
+    "package.json",
+    "packages/main/dist/**",
+    "packages/renderer/dist/**",
+  ],
+
+  // Placed alongside the asar, accessible via process.resourcesPath.
+  extraResources: [
+    { from: "content", to: "content" },
+    // Populate the tours/ directory with panotour bundles before packaging.
+    // { from: "tours", to: "tours" },
+  ],
+
+  win: {
+    target: [
+      { target: "nsis", arch: ["x64"] },
+      { target: "portable", arch: ["x64"] },
+    ],
+    // Provide build-resources/icon.ico (256x256) before packaging.
+    // icon: "build-resources/icon.ico",
+  },
+
+  nsis: {
+    oneClick: true,
+    perMachine: true,
+    allowToChangeInstallationDirectory: false,
+    createDesktopShortcut: false,
+    createStartMenuShortcut: false,
+    runAfterFinish: true,
+  },
+}

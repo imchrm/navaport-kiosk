@@ -14,6 +14,36 @@
 
 ## [Unreleased]
 
+### Added (2026-06-19) — Фаза 5: закалка
+
+**Решения зафиксированы:**
+- D1 закрыт: ОС киоска — Windows x64.
+
+**main:**
+- `hardening.ts` — `setupHardening()`: блокирует F1–F12, Alt+F4, Ctrl+W, Ctrl+R, Ctrl+Shift+I,
+  Ctrl+Shift+Escape, Alt+Escape, PrintScreen через `globalShortcut` только в production;
+  снимает все регистрации при `will-quit`. OS-уровневые сочетания (Ctrl+Alt+Del, Win-key,
+  Alt+Tab) не блокируются из userspace — при необходимости закрываются через Windows
+  Assigned Access / Group Policy.
+- `tour-server.ts` — `startTourServer(toursDir)`: локальный HTTP-сервер на `127.0.0.1:51440`,
+  раздаёт файлы из `resources/tours/`; защита от path-traversal; MIME по расширению.
+  Константа `TOUR_SERVER_BASE_URL` для использования в `ipc-main.ts`.
+- `index.ts` — в production: `app.setLoginItemSettings({ openAtLogin: true })` (авто-старт
+  при входе в Windows), запуск `startTourServer(process.resourcesPath/tours)`;
+  вызов `setupHardening()` перед созданием окна.
+- `ipc-main.ts` — `tourBaseUrl`: dev → `https://360tur.uz/tours`, prod → `http://localhost:51440/tours`.
+  `idleTimeoutMs`: dev → 5 000 мс, prod → 60 000 мс. Путь к content: dev → `__dirname/../../../content`,
+  prod → `process.resourcesPath/content`.
+
+**renderer:**
+- `index.html` CSP — `frame-src` расширен `http://localhost:51440` (локальный сервер туров).
+
+**packaging:**
+- `electron-builder.json5` — Windows targets: NSIS (одно-кнопочный, per-machine) + portable;
+  `files`: `packages/main/dist/**`, `packages/renderer/dist/**`; `extraResources`: `content/`, `tours/`.
+- `package.json` (root) — добавлен `"main"`, скрипты `build` (`build:main && build:renderer`),
+  `pack` (без инсталлятора), `dist` (финальная сборка); devDeps `electron ^31`, `electron-builder ^25`.
+
 ### Added
 - Заведена проектная документация: `CONTEXT.md`, `ARCHITECTURE.md`, `TODO.md`, `CHANGELOG.md`.
 - Зафиксирована архитектура: оболочка Electron, renderer React + Vite + TypeScript strict, монорепо на npm workspaces (`contract` / `content` / `main` / `renderer`).
