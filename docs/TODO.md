@@ -10,7 +10,7 @@
 
 - [ ] Заполнить `tours/` бандлами panotour; раскомментировать строку `tours` в `extraResources` (`electron-builder.json5`)
 - [ ] Добавить `build-resources/icon.ico` (256×256) перед вызовом `npm run dist`
-- [ ] Убрать fallback-кнопку «‹» из `TourScreen` после реализации `TOUR_EXIT` в panotour
+- [x] Убрать fallback-кнопку «‹» из `TourScreen` — выполнено
 
 ---
 
