@@ -20,7 +20,7 @@ app.on('second-instance', () => {
 app.whenReady().then(() => {
   if (!isDev) {
     app.setLoginItemSettings({ openAtLogin: true });
-    const toursDir = path.join(process.resourcesPath, 'tours');
+    const toursDir = process.resourcesPath;
     startTourServer(toursDir);
   }
 

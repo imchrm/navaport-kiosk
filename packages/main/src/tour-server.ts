@@ -21,8 +21,18 @@ const MIME: Record<string, string> = {
   '.woff':  'font/woff',
 };
 
-export function startTourServer(toursDir: string): http.Server {
-  const resolvedBase = path.resolve(toursDir);
+function serveFile(filePath: string, res: http.ServerResponse): void {
+  const ext = path.extname(filePath).toLowerCase();
+  res.writeHead(200, { 'Content-Type': MIME[ext] ?? 'application/octet-stream' });
+  fs.createReadStream(filePath).pipe(res);
+}
+
+// Serve static files rooted at serveDir.
+// URL /tours/neoclassicalbedroom/ maps to <serveDir>/tours/neoclassicalbedroom/index.html.
+// Pass process.resourcesPath as serveDir so the /tours/ URL prefix matches the
+// tours/ subdirectory on disk without double-prefixing.
+export function startTourServer(serveDir: string): http.Server {
+  const resolvedBase = path.resolve(serveDir);
 
   const server = http.createServer((req, res) => {
     const rawUrl = req.url ?? '/';
@@ -36,14 +46,35 @@ export function startTourServer(toursDir: string): http.Server {
     }
 
     fs.stat(filePath, (statErr, stats) => {
-      if (statErr !== null || !stats.isFile()) {
+      if (statErr !== null) {
         res.writeHead(404).end();
         return;
       }
-      const ext = path.extname(filePath).toLowerCase();
-      const contentType = MIME[ext] ?? 'application/octet-stream';
-      res.writeHead(200, { 'Content-Type': contentType });
-      fs.createReadStream(filePath).pipe(res);
+
+      if (stats.isDirectory()) {
+        // No trailing slash → redirect so relative paths in index.html resolve correctly.
+        if (!urlPath.endsWith('/')) {
+          const qs = rawUrl.includes('?') ? rawUrl.slice(rawUrl.indexOf('?')) : '';
+          res.writeHead(301, { Location: `${urlPath}/${qs}` }).end();
+          return;
+        }
+        const indexPath = path.join(filePath, 'index.html');
+        fs.stat(indexPath, (idxErr, idxStats) => {
+          if (idxErr !== null || !idxStats.isFile()) {
+            res.writeHead(404).end();
+            return;
+          }
+          serveFile(indexPath, res);
+        });
+        return;
+      }
+
+      if (!stats.isFile()) {
+        res.writeHead(404).end();
+        return;
+      }
+
+      serveFile(filePath, res);
     });
   });
 
