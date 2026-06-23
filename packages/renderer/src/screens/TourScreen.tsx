@@ -36,13 +36,6 @@ export function TourScreen({ tourId, sceneId, lang, tourBaseUrl, dispatch }: Pro
         allow="fullscreen"
         title={tourId}
       />
-      {/* Fallback exit button — used until panotour implements TOUR_EXIT postMessage */}
-      <button
-        style={styles.exitBtn}
-        onPointerDown={() => dispatch({ type: 'HOME' })}
-      >
-        ‹
-      </button>
     </div>
   );
 }
@@ -58,24 +51,5 @@ const styles = {
     width: '100%',
     height: '100%',
     border: 'none',
-  },
-  exitBtn: {
-    position: 'absolute' as const,
-    top: '20px',
-    left: '20px',
-    width: '64px',
-    height: '64px',
-    background: 'rgba(0,0,0,0.55)',
-    backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(255,255,255,0.25)',
-    borderRadius: '12px',
-    color: '#fff',
-    fontSize: '36px',
-    lineHeight: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'none',
-    zIndex: 9999,
   },
 } as const;
