@@ -7,7 +7,7 @@
     "jsx": "react-jsx",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": []
+    "types": ["react", "react-dom"]
   },
   "include": ["src"]
 }
