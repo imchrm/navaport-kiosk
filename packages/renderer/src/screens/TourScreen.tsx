@@ -33,6 +33,8 @@ export function TourScreen({ tourId, sceneId, lang, tourBaseUrl, dispatch }: Pro
       <iframe
         src={src}
         style={styles.iframe}
+        // Ограничиваем iframe для безопасности, разрешая только необходимое.
+        sandbox="allow-scripts allow-same-origin allow-fullscreen"
         allow="fullscreen"
         title={tourId}
       />
