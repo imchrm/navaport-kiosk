@@ -17,7 +17,7 @@
   extraResources: [
     { from: "content", to: "content" },
     // Populate the tours/ directory with panotour bundles before packaging.
-    // { from: "tours", to: "tours" },
+    { from: "tours", to: "tours" },
   ],
 
   win: {
