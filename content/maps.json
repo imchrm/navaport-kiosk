@@ -42,7 +42,7 @@
         },
         "target": {
           "kind": "tour",
-          "tourId": "test",
+          "tourId": "apartment_1",
           "sceneId": ""
         }
       },

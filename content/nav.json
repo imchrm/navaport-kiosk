@@ -14,7 +14,7 @@
         "kind": "leaf",
         "id": "gate-a2",
         "title": { "uz": "A2 eshigi", "ru": "Выход A2", "en": "Gate A2" },
-        "target": { "kind": "tour", "tourId": "test", "sceneId": "gate-a2" }
+        "target": { "kind": "tour", "tourId": "apartment_1", "sceneId": "gate-a2" }
       },
       {
         "kind": "leaf",
@@ -39,7 +39,7 @@
         "kind": "leaf",
         "id": "cafe",
         "title": { "uz": "Kafe", "ru": "Кафе", "en": "Cafe" },
-        "target": { "kind": "tour", "tourId": "test", "sceneId": "" }
+        "target": { "kind": "tour", "tourId": "apartment_1", "sceneId": "" }
       },
       {
         "kind": "leaf",
