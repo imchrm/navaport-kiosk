@@ -30,8 +30,10 @@ app.whenReady().then(() => {
   startLifecycle(win);
 
   win.webContents.on('destroyed', () => {
-    app.relaunch();
-    app.exit(0);
+    if (!isDev) {
+      app.relaunch();
+      app.exit(0);
+    }
   });
 });
 
