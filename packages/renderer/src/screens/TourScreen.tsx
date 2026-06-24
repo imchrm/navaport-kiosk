@@ -33,7 +33,6 @@ export function TourScreen({ tourId, sceneId, lang, tourBaseUrl, dispatch }: Pro
       <iframe
         src={src}
         style={styles.iframe}
-        allow="fullscreen"
         title={tourId}
       />
     </div>
