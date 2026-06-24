@@ -33,6 +33,7 @@ export function reducer(state: AppState, action: Action): AppState {
       return { ...state, screen: { kind: 'menu', path: [] } };
 
     case 'IDLE_RESET':
+      if (state.screen.kind === 'attract') return state;
       return { ...state, screen: { kind: 'attract' } };
 
     case 'HOME':

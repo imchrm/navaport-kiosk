@@ -6,6 +6,10 @@ const api: KioskApi = {
     ipcRenderer.send('kiosk:reportActivity');
   },
 
+  setTourActive(active: boolean): void {
+    ipcRenderer.send('kiosk:setTourActive', active);
+  },
+
   onIdleReset(cb: () => void): () => void {
     const handler = () => cb();
     ipcRenderer.on('kiosk:idleReset', handler);

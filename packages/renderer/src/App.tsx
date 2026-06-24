@@ -69,11 +69,18 @@ export function App(): React.ReactElement {
     return () => window.removeEventListener('pointerdown', handle);
   }, []);
 
-  // Auto-wake: menu appears 3 seconds after attract starts
+  // While in tour: switch main to the longer idle timeout and use window.blur
+  // as a proxy for iframe interaction (iframe pointer events don't bubble out).
   useEffect(() => {
-    if (state.screen.kind !== 'attract') return;
-    const timer = setTimeout(() => dispatch({ type: 'WAKE' }), 3_000);
-    return () => clearTimeout(timer);
+    if (state.screen.kind !== 'tour') return;
+    window.kiosk.reportActivity();
+    window.kiosk.setTourActive(true);
+    const onBlur = () => window.kiosk.reportActivity();
+    window.addEventListener('blur', onBlur);
+    return () => {
+      window.removeEventListener('blur', onBlur);
+      window.kiosk.setTourActive(false);
+    };
   }, [state.screen.kind]);
 
   // Control video play/pause based on screen state

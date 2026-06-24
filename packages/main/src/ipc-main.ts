@@ -7,7 +7,8 @@ import { TOUR_SERVER_BASE_URL } from './tour-server';
 const isDev = process.env['NODE_ENV'] === 'development';
 
 const config: KioskConfig = {
-  idleTimeoutMs: isDev ? 5_000 : 60_000,
+  menuIdleTimeoutMs: isDev ? 5_000 : 60_000,
+  tourIdleTimeoutMs: isDev ? 30_000 : 300_000,
   defaultLang: 'ru',
   attractVideoSrc: 'video/attract.mp4',
   tourBaseUrl: isDev ? 'https://360tur.uz/tours' : TOUR_SERVER_BASE_URL,
