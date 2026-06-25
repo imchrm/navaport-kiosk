@@ -21,7 +21,7 @@ export function MapScreen({ map, lang, i18n, dispatch }: Props): React.ReactElem
         breadcrumbs={[{ id: map.id, title: map.title }]}
         canGoBack={true}
         onHome={() => dispatch({ type: 'HOME' })}
-        onBack={() => dispatch({ type: 'HOME' })}
+        onBack={() => dispatch({ type: 'BACK' })}
         onSetLang={(l) => dispatch({ type: 'SET_LANG', lang: l })}
       />
       <div style={styles.mapArea}>

@@ -37,7 +37,7 @@ export function reducer(state: AppState, action: Action): AppState {
       return { ...state, screen: { kind: 'attract' } };
 
     case 'HOME':
-      return { ...state, screen: { kind: 'menu', path: [] } };
+      return { ...state, screen: { kind: 'attract' } };
 
     case 'BACK': {
       if (state.screen.kind !== 'menu') return { ...state, screen: { kind: 'menu', path: [] } };
