@@ -42,7 +42,6 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'BACK': {
       if (state.screen.kind !== 'menu') return { ...state, screen: { kind: 'menu', path: [] } };
       const newPath = state.screen.path.slice(0, -1);
-      if (newPath.length === 0) return { ...state, screen: { kind: 'attract' } };
       return { ...state, screen: { kind: 'menu', path: newPath } };
     }
 
